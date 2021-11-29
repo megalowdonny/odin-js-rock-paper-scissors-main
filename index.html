@@ -30,7 +30,7 @@
             playerChoice = 3;
             break;
           default:
-            console.log("Wow you suck, don't even listen to instructions or anything, get outta here.")
+            alert("Wow you suck, don't even listen to instructions or anything, get outta here.")
         }
         return playerChoice;
       }
@@ -41,11 +41,14 @@
         playerPlay();
         if (computerChoice === playerChoice) {
           console.log('It was a draw!');
+          alert('It was a draw!');
         } else if ((computerChoice === 1 && playerChoice === 2) || (computerChoice === 2 && playerChoice === 3) || (computerChoice === 3 && playerChoice === 1)) {
           console.log('You win!');
+          alert('You won!');
           playerScore++;
         } else {
           console.log('You lost!');
+          alert('You lost!');
           computerScore++;
         }
       }
@@ -56,6 +59,7 @@
           playRound();
         }
         console.log(`You won ${playerScore} times and lost ${computerScore} times.`);
+        alert(`You won ${playerScore} times and lost ${computerScore} times.`);
       }
     </script>
   </body>
