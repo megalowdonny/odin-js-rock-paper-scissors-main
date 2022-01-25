@@ -4,13 +4,37 @@
     <title>Rock Paper Scissors</title>
     <meta charset='UTF-8'>
   </head>
-  <body onload="playGame()">
+  <body>
+    <div class='rpsbutton'>
+      <button id='rockButton' class='rpsbutton' data-choice='1'>
+        <label for='rockButton'>Rock</label>
+      </button>
+
+      <button id='paperButton' class='rpsbutton' data-choice='2'>
+        <label for='paperButton'>Paper</label>
+      </button>
+
+      <button id='scissorsButton' class='rpsbutton' data-choice='3'>
+        <label for='scissorsButton'>Scissors</label>
+      </button>
+    </div>
+
+    <div id='results'>
+      <h2 class='resultsMessage'></h2>
+      <p class='resultsWins'></p>
+      <p class='resultsLosses'></p>
+    </div>
     <script>
 
       let playerScore = 0;
       let computerScore = 0;
       let computerChoice;
-      let playerChoice;
+      const buttons = document.querySelectorAll('button');
+      const results = document.querySelector('#results')
+      const resultsMessage = results.querySelector('.resultsMessage');
+      const wins = results.querySelector('.resultsWins');
+      const losses = results.querySelector('.resultsLosses');
+      
       
       // Picks between 1 and 3 for computer, 1 is rock, 2 is paper, 3 is scissors
       function computerPlay() {
@@ -39,31 +63,40 @@
       // This is what gets ran 5 times from playGame(), and has all of the scoring logic
       function playRound() {
         computerPlay();
-        playerPlay();
+        // playerPlay();
+        const playerChoice = parseInt(this.dataset.choice);
+        console.log(playerChoice);
         if (computerChoice === playerChoice) {
-          console.log('It was a draw!');
-          alert('It was a draw!');
+          resultsMessage.textContent = 'It was a draw!';
+          //alert('It was a draw!');
+          return;
         } else if ((computerChoice === 1 && playerChoice === 2) 
               || (computerChoice === 2 && playerChoice === 3) 
               || (computerChoice === 3 && playerChoice === 1)) {
-          console.log('You win!');
-          alert('You won!');
+          resultsMessage.textContent = 'You win!';
+          //alert('You won!');
           playerScore++;
+          return;
         } else {
-          console.log('You lost!');
-          alert('You lost!');
+          resultsMessage.textContent = 'You lost!';
+          //alert('You lost!');
           computerScore++;
+          return;
         }
+        wins.textContent = `Total Wins: ${playerScore}`;
+        losses.textContent = `Total Losses: ${computerScore}`;
       }
 
-      // Currently set to play for 5 games, and displays the total wins/losses after all 5
-      function playGame() {
-        for (i = 1; i < 6; i++) {
-          playRound();
-        }
-        console.log(`You won ${playerScore} times and lost ${computerScore} times.`);
-        alert(`You won ${playerScore} times and lost ${computerScore} times.`);
-      }
+      // // Currently set to play for 5 games, and displays the total wins/losses after all 5
+      // function playGame() {
+      //   for (i = 1; i < 6; i++) {
+      //     playRound();
+      //   }
+      //   console.log(`You won ${playerScore} times and lost ${computerScore} times.`);
+      //   alert(`You won ${playerScore} times and lost ${computerScore} times.`);
+      // }
+
+      buttons.forEach(button => button.addEventListener('mouseup', playRound));
     </script>
   </body>
 </html>
