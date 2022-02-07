@@ -3,9 +3,48 @@
   <head>
     <title>Rock Paper Scissors</title>
     <meta charset='UTF-8'>
+    <style>
+      button {
+        width: 100px;
+        height: 50px;
+        font-size: 24px;
+      }
+
+      .buttonSection {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+      }
+
+      .title {
+        font-size: 32px;
+        text-align: center;
+      }
+
+      .winnerMessage {
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+      #results {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
-    <div class='rpsbutton'>
+    <div class ='title'>
+      <h1>Click On Your Choice</h1>
+    </div>
+    <div class='buttonSection'>
       <button id='rockButton' class='rpsbutton' data-choice='1'>
         <label for='rockButton'>Rock</label>
       </button>
@@ -23,6 +62,7 @@
       <h2 class='resultsMessage'></h2>
       <p class='resultsWins'></p>
       <p class='resultsLosses'></p>
+      <h2 class='winnerMessage'></h2>
     </div>
     <script>
 
@@ -34,6 +74,7 @@
       const resultsMessage = results.querySelector('.resultsMessage');
       const wins = results.querySelector('.resultsWins');
       const losses = results.querySelector('.resultsLosses');
+      const winner = results.querySelector('.winnerMessage');
       
       
       // Picks between 1 and 3 for computer, 1 is rock, 2 is paper, 3 is scissors
@@ -41,7 +82,7 @@
         computerChoice = Math.floor(Math.random() * 3) + 1;
       }
 
-      // Gets player's choice
+      // Gets player's choice FOR OLD METHOD
       function playerPlay() {
         playerChoice = prompt('Please choose rock, paper, or scissors:').toLowerCase(); // Accounts for any capitalization
         switch (playerChoice) {
@@ -60,32 +101,33 @@
         return playerChoice;
       }
 
-      // This is what gets ran 5 times from playGame(), and has all of the scoring logic
+      // Ran 5 times with old method, only thing running with new one
       function playRound() {
         computerPlay();
-        // playerPlay();
+        // playerPlay(); THIS WAS USED WITH OLD METHOD
         const playerChoice = parseInt(this.dataset.choice);
         console.log(playerChoice);
         if (computerChoice === playerChoice) {
           resultsMessage.textContent = 'It was a draw!';
-          //alert('It was a draw!');
-          return;
         } else if ((computerChoice === 1 && playerChoice === 2) 
               || (computerChoice === 2 && playerChoice === 3) 
               || (computerChoice === 3 && playerChoice === 1)) {
           resultsMessage.textContent = 'You win!';
-          //alert('You won!');
           playerScore++;
-          return;
         } else {
           resultsMessage.textContent = 'You lost!';
-          //alert('You lost!');
           computerScore++;
-          return;
         }
-        // FIX BELOW HERE
         wins.textContent = `Total Wins: ${playerScore}`;
         losses.textContent = `Total Losses: ${computerScore}`;
+
+        if (playerScore >= 5) {
+          winner.textContent = 'You won!';
+          winner.style.color = 'green';
+        } else if (computerScore >= 5) {
+          winner.textContent = 'You lost!'
+          winner.style.color = 'red';
+        }
       }
 
       // // Currently set to play for 5 games, and displays the total wins/losses after all 5
