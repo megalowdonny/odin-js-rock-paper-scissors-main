@@ -7,6 +7,14 @@
       :root {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         background-color: rgb(233, 220, 255);
+
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        position: relative;
+        min-height: 100vh;
       }
 
       button {
@@ -16,6 +24,14 @@
         background: linear-gradient(45deg, rgb(255, 220, 220), rgb(215, 228, 255));
         border: 1px solid rgba(0, 0, 0, 0.514);
         border-radius: 10%;
+      }
+
+      footer {
+        position: relative;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1.4rem;
+        font-style: italic;
       }
 
       .buttonSection {
@@ -80,6 +96,10 @@
       <p class='resultsLosses'></p>
       <h2 class='winnerMessage'></h2>
     </div>
+
+    <footer>
+      Coded by Travis Vawser
+    </footer>
     <script>
 
       let playerScore = 0;
